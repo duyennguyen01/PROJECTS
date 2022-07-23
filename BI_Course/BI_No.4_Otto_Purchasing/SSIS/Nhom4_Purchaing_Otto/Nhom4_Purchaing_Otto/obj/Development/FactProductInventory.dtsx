@@ -1,0 +1,2844 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/21/2022 12:51:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="THANHHTT-IS"
+  DTS:CreatorName="THANHHTT-IS\thanhhtt-is"
+  DTS:DTSID="{9672CA04-6ADC-4173-999A-E2D18AD92405}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.180"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{E13B99F6-75B4-4696-BBE8-8494CE5C0817}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\.AdventureWorks2014]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{CED711D1-FE58-4FD6-B5EB-59C529EDDCB2}"
+      DTS:ObjectName=".\.AdventureWorks2014">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\;Initial Catalog=AdventureWorks2014;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{DA031143-9DA5-404F-95F2-06CE2231985D}"
+      DTS:ObjectName=".\.BI_No.4_Otto_Purchasing">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\;Initial Catalog=BI_No.4_Otto_Purchasing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{1102B1EB-D70D-4321-A72B-2EB5D61B5160}"
+      DTS:ObjectName=".\.BI_No.4_Otto_Purchasing 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=.\;Initial Catalog=BI_No.4_Otto_Purchasing;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\FactProductInventory"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C506A4C6-C592-452D-89CF-3CEF905DAB46}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="FactProductInventory"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\FactProductInventory\AdventureWorks2014"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="AdventureWorks2014"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select I.LocationID, I.Bin, I.ModifiedDate, Quantity , L.Name LocationName, L.Availability, p.SafetyStockLevel, P.ReorderPoint,I.Shelf, P.ProductID
+from Production.ProductInventory I join Production.Location L on I.LocationID = L.LocationID join Production.Product P on I.ProductID = P.ProductID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\AdventureWorks2014.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.AdventureWorks2014]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.AdventureWorks2014]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[LocationID]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]"
+                      name="LocationID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Bin]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Bin]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Bin]"
+                      name="Bin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                      length="50"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationName]"
+                      name="LocationName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Availability]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Availability]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Availability]"
+                      name="Availability"
+                      precision="8"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockLevel]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ReorderPoint]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ReorderPoint]"
+                      name="ReorderPoint"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Shelf]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Shelf]"
+                      length="10"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Shelf]"
+                      name="Shelf"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]"
+                      name="ProductID"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[LocationID]"
+                      dataType="i2"
+                      name="LocationID" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Bin]"
+                      dataType="ui1"
+                      name="Bin" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LocationName" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Availability]"
+                      dataType="numeric"
+                      name="Availability"
+                      precision="8"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockLevel]"
+                      dataType="i2"
+                      name="SafetyStockLevel" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ReorderPoint]"
+                      dataType="i2"
+                      name="ReorderPoint" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      name="Shelf" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].ExternalColumns[ProductID]"
+                      dataType="i4"
+                      name="ProductID" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[LocationID]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[LocationID]"
+                      name="LocationID" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Bin]"
+                      dataType="ui1"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Bin]"
+                      name="Bin" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                      name="LocationName" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Availability]"
+                      dataType="numeric"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Availability]"
+                      name="Availability"
+                      precision="8"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ReorderPoint]"
+                      name="ReorderPoint" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[Shelf]"
+                      name="Shelf" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ProductID]"
+                      name="ProductID" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Routes data rows to different outputs depending on the content of the data. Use conditions (SSIS expressions) to specify which rows are routed. For example, separate records that need to be cleaned from those that are ready to be loaded or route only a subset of records."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input].Columns[QuantityDW]"
+                      cachedDataType="i2"
+                      cachedName="QuantityDW"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[QuantityDW]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\Conditional Split.Outputs[Insert]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Insert"
+                  synchronousInputId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">[ISNULL](#{Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[QuantityDW]})</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">ISNULL(QuantityDW)</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\Conditional Split.Outputs[Update]"
+                  description="Output 2 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Update"
+                  synchronousInputId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[QuantityDW]} != #{Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]}</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">QuantityDW != Quantity</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">1</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\FactProductInventory"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="FactProductInventory"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactProductInventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\FactProductInventory.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing 1]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing 1]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductInventoryKeyDW]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ProductInventoryKey]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductInventoryKeyDW]"
+                      name="ProductInventoryKeyDW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationKeyDW]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationKeyDW]"
+                      name="LocationKeyDW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductKeyDW]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductKeyDW]"
+                      name="ProductKeyDW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                      length="50"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationName]"
+                      name="LocationName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Shelf]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Shelf]"
+                      length="10"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Shelf]"
+                      name="Shelf"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Bin]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Bin]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Bin]"
+                      name="Bin"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[QuantityDW]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[QuantityDW]"
+                      name="QuantityDW"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ModifiedDate]"
+                      name="ModifiedDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockLevel]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ReorderPoint]"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ReorderPoint]"
+                      name="ReorderPoint"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ProductInventoryKey]"
+                      dataType="i4"
+                      name="ProductInventoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[LocationKey]"
+                      dataType="i4"
+                      name="LocationKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LocationName" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      name="Shelf" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Bin]"
+                      dataType="ui1"
+                      name="Bin" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[SafetyStockLevel]"
+                      dataType="i2"
+                      name="SafetyStockLevel" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].ExternalColumns[ReorderPoint]"
+                      dataType="i2"
+                      name="ReorderPoint" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ProductInventoryKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ProductInventoryKey]"
+                      name="ProductInventoryKey" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[LocationKey]"
+                      name="LocationKey" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[LocationName]"
+                      name="LocationName" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Shelf]"
+                      name="Shelf" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Bin]"
+                      dataType="ui1"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Bin]"
+                      name="Bin" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ModifiedDate]"
+                      name="ModifiedDate" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ReorderPoint]"
+                      name="ReorderPoint" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\Insert"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactProductInventory]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\Insert.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[Bin]"
+                      cachedDataType="ui1"
+                      cachedName="Bin"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Bin]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Bin]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[LocationName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LocationName"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[LocationName]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationName]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[SafetyStockLevel]"
+                      cachedDataType="i2"
+                      cachedName="SafetyStockLevel"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStockLevel]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[SafetyStockLevel]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[Shelf]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Shelf"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Shelf]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Shelf]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[ReorderPoint]"
+                      cachedDataType="i2"
+                      cachedName="ReorderPoint"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ReorderPoint]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ReorderPoint]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].Columns[LocationKey]"
+                      cachedDataType="i4"
+                      cachedName="LocationKey"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ProductInventoryKey]"
+                      dataType="i4"
+                      name="ProductInventoryKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[LocationKey]"
+                      dataType="i4"
+                      name="LocationKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      name="LocationName" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      name="Shelf" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Bin]"
+                      dataType="ui1"
+                      name="Bin" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      name="ModifiedDate" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[SafetyStockLevel]"
+                      dataType="i2"
+                      name="SafetyStockLevel" />
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input].ExternalColumns[ReorderPoint]"
+                      dataType="i2"
+                      name="ReorderPoint" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\Insert.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Insert.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\LookupProduct"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LookupProduct"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProduct]) [refTable]
+where [refTable].[ProductID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ProductKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ProductNumber" dataType="DT_WSTR" length="25" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="SafetyStockLevel" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ReorderPoint" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\LookupProduct.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ProductID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ProductKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\LookupProductLocation"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="LookupProductLocation"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimProductLocation]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimProductLocation]) [refTable]
+where [refTable].[LocationID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="LocationKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LocationID" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="LocationName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Availability" dataType="DT_NUMERIC" length="0" precision="8" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\LookupProductLocation.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input].Columns[LocationID]"
+                      cachedDataType="i2"
+                      cachedName="LocationID"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">LocationID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output].Columns[LocationKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output].Columns[LocationKey]"
+                      name="LocationKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">LocationKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\Merge Join"
+              componentClassID="Microsoft.MergeJoin"
+              contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources."
+              name="Merge Join"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of join to perform."
+                  name="JoinType"
+                  typeConverter="JoinType">1</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the number of columns in the ordering key."
+                  name="NumKeyColumns">2</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the null values are treated as equal values."
+                  name="TreatNullsAsEqual">true</property>
+                <property
+                  dataType="System.Int32"
+                  description="Indicates the requested maximum buffers per input before blocking."
+                  name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[LocationKey]"
+                      cachedDataType="i4"
+                      cachedName="LocationKey"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationKey]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Bin]"
+                      cachedDataType="ui1"
+                      cachedName="Bin"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Bin]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ModifiedDate]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[LocationName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LocationName"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationName]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Availability]"
+                      cachedDataType="numeric"
+                      cachedName="Availability"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Availability]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[SafetyStockLevel]"
+                      cachedDataType="i2"
+                      cachedName="SafetyStockLevel"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[SafetyStockLevel]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Shelf]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Shelf"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Shelf]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ReorderPoint]"
+                      cachedDataType="i2"
+                      cachedName="ReorderPoint"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ReorderPoint]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+                <input
+                  refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input]"
+                  hasSideEffects="true"
+                  name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input].Columns[LocationKeyDW]"
+                      cachedDataType="i4"
+                      cachedName="LocationKeyDW"
+                      cachedSortKeyPosition="1"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[LocationKeyDW]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input].Columns[ProductKeyDW]"
+                      cachedDataType="i4"
+                      cachedName="ProductKeyDW"
+                      cachedSortKeyPosition="2"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ProductKeyDW]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input].Columns[QuantityDW]"
+                      cachedDataType="i2"
+                      cachedName="QuantityDW"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[QuantityDW]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output]"
+                  isSorted="true"
+                  name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Bin]"
+                      dataType="ui1"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Bin]"
+                      name="Bin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Bin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]"
+                      name="Quantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Quantity]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationName]"
+                      name="LocationName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[LocationName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Availability]"
+                      dataType="numeric"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Availability]"
+                      name="Availability"
+                      precision="8"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Availability]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[SafetyStockLevel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Shelf]"
+                      name="Shelf">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[Shelf]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ReorderPoint]"
+                      name="ReorderPoint">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ReorderPoint]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[ProductKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]"
+                      name="LocationKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input].Columns[LocationKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[QuantityDW]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[QuantityDW]"
+                      name="QuantityDW">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="The input column associated with this output column"
+                          name="InputColumnID">#{Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input].Columns[QuantityDW]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\SortDBAdventureWorks"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="SortDBAdventureWorks"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[LocationID]"
+                      cachedDataType="i2"
+                      cachedName="LocationID"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[Bin]"
+                      cachedDataType="ui1"
+                      cachedName="Bin"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Bin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Quantity]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[LocationName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LocationName"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[Availability]"
+                      cachedDataType="numeric"
+                      cachedName="Availability"
+                      cachedPrecision="8"
+                      cachedScale="2"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Availability]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[SafetyStockLevel]"
+                      cachedDataType="i2"
+                      cachedName="SafetyStockLevel"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[ReorderPoint]"
+                      cachedDataType="i2"
+                      cachedName="ReorderPoint"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ReorderPoint]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[Shelf]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Shelf"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Shelf]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[ProductID]"
+                      cachedDataType="i4"
+                      cachedName="ProductID"
+                      lineageId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      lineageId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output].Columns[ProductKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input].Columns[LocationKey]"
+                      cachedDataType="i4"
+                      cachedName="LocationKey"
+                      lineageId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output].Columns[LocationKey]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationID]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationID]"
+                      name="LocationID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Bin]"
+                      dataType="ui1"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Bin]"
+                      name="Bin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Bin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Quantity]"
+                      name="Quantity">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Quantity]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationName]"
+                      name="LocationName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[LocationName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Availability]"
+                      dataType="numeric"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Availability]"
+                      name="Availability"
+                      precision="8"
+                      scale="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Availability]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ReorderPoint]"
+                      name="ReorderPoint">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ReorderPoint]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[Shelf]"
+                      name="Shelf">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[Shelf]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ProductID]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ProductID]"
+                      name="ProductID">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output].Columns[ProductID]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output].Columns[ProductKey]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationKey]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output].Columns[LocationKey]"
+                      name="LocationKey"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output].Columns[LocationKey]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\SortFactProductInventory"
+              componentClassID="Microsoft.Sort"
+              contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows."
+              name="SortFactProductInventory"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the Sort transformation removes rows with duplicate sort values."
+                  name="EliminateDuplicates">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the maximum number of threads to use for sorting."
+                  expressionType="Notify"
+                  name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input]"
+                  name="Sort Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[ProductInventoryKeyDW]"
+                      cachedDataType="i4"
+                      cachedName="ProductInventoryKeyDW"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductInventoryKeyDW]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[LocationKeyDW]"
+                      cachedDataType="i4"
+                      cachedName="LocationKeyDW"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationKeyDW]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[ProductKeyDW]"
+                      cachedDataType="i4"
+                      cachedName="ProductKeyDW"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductKeyDW]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">2</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[LocationName]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="LocationName"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationName]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[Shelf]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="Shelf"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Shelf]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[Bin]"
+                      cachedDataType="ui1"
+                      cachedName="Bin"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Bin]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[QuantityDW]"
+                      cachedDataType="i2"
+                      cachedName="QuantityDW"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[QuantityDW]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[ModifiedDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ModifiedDate"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ModifiedDate]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[SafetyStockLevel]"
+                      cachedDataType="i2"
+                      cachedName="SafetyStockLevel"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input].Columns[ReorderPoint]"
+                      cachedDataType="i2"
+                      cachedName="ReorderPoint"
+                      lineageId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ReorderPoint]">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the comparison options for character data."
+                          name="NewComparisonFlags">0</property>
+                        <property
+                          dataType="System.Int32"
+                          description="Specifies the sort order of the column."
+                          name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output]"
+                  isSorted="true"
+                  name="Sort Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ProductInventoryKeyDW]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ProductInventoryKeyDW]"
+                      name="ProductInventoryKeyDW">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductInventoryKeyDW]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[LocationKeyDW]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[LocationKeyDW]"
+                      name="LocationKeyDW"
+                      sortKeyPosition="1">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationKeyDW]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ProductKeyDW]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ProductKeyDW]"
+                      name="ProductKeyDW"
+                      sortKeyPosition="2">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ProductKeyDW]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[LocationName]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[LocationName]"
+                      name="LocationName">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[LocationName]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[Shelf]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[Shelf]"
+                      name="Shelf">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Shelf]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[Bin]"
+                      dataType="ui1"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[Bin]"
+                      name="Bin">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[Bin]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[QuantityDW]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[QuantityDW]"
+                      name="QuantityDW">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[QuantityDW]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ModifiedDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ModifiedDate]"
+                      name="ModifiedDate">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ModifiedDate]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[SafetyStockLevel]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[SafetyStockLevel]"
+                      name="SafetyStockLevel">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[SafetyStockLevel]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ReorderPoint]"
+                      dataType="i2"
+                      lineageId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output].Columns[ReorderPoint]"
+                      name="ReorderPoint">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the lineage identifier of the input column that is associated with this output column."
+                          name="SortColumnId">#{Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output].Columns[ReorderPoint]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\FactProductInventory\Update"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Update"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">update [dbo].[FactProductInventory]
+set [Quantity]=?
+where [LocationKey] =?
+and [ProductKey]=?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\FactProductInventory\Update.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  connectionManagerRefId="Package.ConnectionManagers[.\.BI_No.4_Otto_Purchasing]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].Columns[LocationKey]"
+                      cachedDataType="i4"
+                      cachedName="LocationKey"
+                      cachedSortKeyPosition="1"
+                      externalMetadataColumnId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[LocationKey]" />
+                    <inputColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      cachedSortKeyPosition="2"
+                      externalMetadataColumnId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      lineageId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output].Columns[ProductKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_0]"
+                      dataType="i2"
+                      name="Param_0">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_1]"
+                      dataType="i4"
+                      name="Param_1">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input].ExternalColumns[Param_2]"
+                      dataType="i4"
+                      name="Param_2">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\FactProductInventory\Update.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\FactProductInventory\Update.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\FactProductInventory\Update.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Update.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\FactProductInventory\Update.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\FactProductInventory\Update.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\FactProductInventory.Paths[Insert]"
+              endId="Package\FactProductInventory\Insert.Inputs[OLE DB Destination Input]"
+              name="Insert"
+              startId="Package\FactProductInventory\Conditional Split.Outputs[Insert]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Lookup Match Output]"
+              endId="Package\FactProductInventory\LookupProductLocation.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\FactProductInventory\LookupProduct.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Lookup Match Output1]"
+              endId="Package\FactProductInventory\SortDBAdventureWorks.Inputs[Sort Input]"
+              name="Lookup Match Output"
+              startId="Package\FactProductInventory\LookupProductLocation.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Merge Join Output]"
+              endId="Package\FactProductInventory\Conditional Split.Inputs[Conditional Split Input]"
+              name="Merge Join Output"
+              startId="Package\FactProductInventory\Merge Join.Outputs[Merge Join Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[OLE DB Source Output]"
+              endId="Package\FactProductInventory\LookupProduct.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\FactProductInventory\AdventureWorks2014.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[OLE DB Source Output1]"
+              endId="Package\FactProductInventory\SortFactProductInventory.Inputs[Sort Input]"
+              name="OLE DB Source Output"
+              startId="Package\FactProductInventory\FactProductInventory.Outputs[OLE DB Source Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Sort Output]"
+              endId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Left Input]"
+              name="Sort Output"
+              startId="Package\FactProductInventory\SortDBAdventureWorks.Outputs[Sort Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Sort Output1]"
+              endId="Package\FactProductInventory\Merge Join.Inputs[Merge Join Right Input]"
+              name="Sort Output"
+              startId="Package\FactProductInventory\SortFactProductInventory.Outputs[Sort Output]" />
+            <path
+              refId="Package\FactProductInventory.Paths[Update]"
+              endId="Package\FactProductInventory\Update.Inputs[OLE DB Command Input]"
+              name="Update"
+              startId="Package\FactProductInventory\Conditional Split.Outputs[Update]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\FactProductInventory"
+          TopLeft="352.857148866264,107.058825030871" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\FactProductInventory">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\FactProductInventory\AdventureWorks2014"
+          TopLeft="146.428573922235,14.5294119684754" />
+        <NodeLayout
+          Size="179.2,41.6"
+          Id="Package\FactProductInventory\FactProductInventory"
+          TopLeft="512.142865864598,24.4705885784849" />
+        <NodeLayout
+          Size="148,41.6"
+          Id="Package\FactProductInventory\LookupProduct"
+          TopLeft="165.714288536383,88.7058835970077" />
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\FactProductInventory\LookupProductLocation"
+          TopLeft="145.714288195785,185.058826124792" />
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[OLE DB Source Output]"
+          TopLeft="237.871431229309,56.1294119684754">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5764716285323"
+              Start="0,0"
+              End="0,25.0764716285323">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.0764716285323" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Lookup Match Output]"
+          TopLeft="239.714288366084,130.305883597008">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.7529425277841"
+              Start="0,0"
+              End="0,47.2529425277841">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,47.2529425277841" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,17.8217837638921,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="188.8,41.6"
+          Id="Package\FactProductInventory\SortDBAdventureWorks"
+          TopLeft="142.857145289986,260.082356319461" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\FactProductInventory\SortFactProductInventory"
+          TopLeft="507.142865779449,119.905882867727" />
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[OLE DB Source Output1]"
+          TopLeft="604.042865822023,66.0705885784849">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,53.8352942892425"
+              Start="0,0"
+              End="0,46.3352942892425">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.3352942892425" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Lookup Match Output1]"
+          TopLeft="238.485716742885,226.658826124792">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,33.4235301946687"
+              Start="0,0"
+              End="0,25.9235301946687">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.9235301946687" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,7.15707759733435,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="129.6,41.6"
+          Id="Package\FactProductInventory\Merge Join"
+          TopLeft="546.428580734195,254.047061118618" />
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Sort Output]"
+          TopLeft="331.657145289986,277.864708719039">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="214.771435444209,0"
+              Start="0,0"
+              End="207.271435444209,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="207.271435444209,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Sort Output1]"
+          TopLeft="608.785723256822,161.505882867727">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,92.5411782508903"
+              Start="0,0"
+              End="0,85.0411782508903">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,85.0411782508903" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154.4,41.6"
+          Id="Package\FactProductInventory\Conditional Split"
+          TopLeft="720.714297987977,251.929413973996" />
+        <NodeLayout
+          Size="112,41.6"
+          Id="Package\FactProductInventory\Update"
+          TopLeft="704.342867652738,174.694118773153" />
+        <NodeLayout
+          Size="106.4,41.6"
+          Id="Package\FactProductInventory\Insert"
+          TopLeft="710.371438339292,348.282356501781" />
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Merge Join Output]"
+          TopLeft="676.028580734195,273.788237546307">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="44.6857172537821,0"
+              Start="0,0"
+              End="37.1857172537821,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="37.1857172537821,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Insert]"
+          TopLeft="797.914297987977,293.529413973997">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-34.342859648685,54.7529425277841"
+              Start="0,0"
+              End="-34.342859648685,47.2529425277841">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23.3764712638921" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23.3764712638921"
+                    Point2="0,27.3764712638921"
+                    Point3="-4,27.3764712638921" />
+                  <mssgle:LineSegment
+                    End="-30.342859648685,27.3764712638921" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-30.342859648685,27.3764712638921"
+                    Point2="-34.342859648685,27.3764712638921"
+                    Point3="-34.342859648685,31.3764712638921" />
+                  <mssgle:LineSegment
+                    End="-34.342859648685,47.2529425277841" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-30.9244181055925,32.3764712638921,27.5059765625,9.40234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\FactProductInventory.Paths[Update]"
+          TopLeft="797.914297987977,251.929413973996">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-37.5714303352393,-35.635295200843"
+              Start="0,0"
+              End="-37.5714303352393,-28.135295200843">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,-13.8176476004215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,-13.8176476004215"
+                    Point2="0,-17.8176476004215"
+                    Point3="-4,-17.8176476004215" />
+                  <mssgle:LineSegment
+                    End="-33.5714303352393,-17.8176476004215" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-33.5714303352393,-17.8176476004215"
+                    Point2="-37.5714303352393,-17.8176476004215"
+                    Point3="-37.5714303352393,-21.8176476004215" />
+                  <mssgle:LineSegment
+                    End="-37.5714303352393,-28.135295200843" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-35.0660081363696,-12.8176476004215,32.5605859375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactProductInventory\AdventureWorks2014">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactProductInventory\FactProductInventory">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactProductInventory\LookupProduct">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProduct]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactProductInventory\LookupProductLocation">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimProductLocation]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\FactProductInventory\Insert">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
